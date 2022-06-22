@@ -1,25 +1,33 @@
 import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link, Component} from "react-router-dom";
+import Button from '@mui/material/Button';
+import Header from './Header/Header.js';
+import Main from './Main/Main.js';
+import Footer from './Footer/Footer.js';
+import Login from './Main/Login.js';  
+import Reg from './Main/Reg.js';  
+import Dashboard from './Main/Dashboard.js';  
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+ 
+
+
+
+
+export default class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+  
+  render(){
+    return (
+      <div>
+        <Header/>
+        <Main/>
+        <Footer/>
+      </div>
+    );
+  }
 }
 
-export default App;
