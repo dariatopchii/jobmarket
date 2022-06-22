@@ -15,34 +15,25 @@ class Header extends React.Component {
   render() {
     return(
       <div className='headerContainer'>
-       <Router>    
             <div className="logo">
               <img src={Logo} alt="websiteLogo"/>
             </div>
             <div className="nav-item">
-              <Link to='/Main/Vacancy' className="nav-link"><p>Вакансії</p></Link>
+              <Link to='/Vacancy' className="nav-link"><p>Вакансії</p></Link>
             </div>
             <div className="nav-item">    
-              <Link to='/Main/Cv' className="nav-link"><p>Резюме</p></Link>   
+              <Link to='/Cv' className="nav-link"><p>Резюме</p></Link>   
             </div>    
             <div className="nav-item">    
-              <Link to='/Main/Login' className="nav-link"><p>Login</p></Link>   
+              <Link to='/Login' className="nav-link"><p>Login</p></Link>   
             </div> 
             <div className="nav-item">    
-              <Link to='/Main/Signup' className="nav-link"><p>Sign Up</p></Link>    
+              <Link to='/Signup' className="nav-link"><p>Sign Up</p></Link>    
               </div>        
-          <Routes>    
-            <Route path='/Main' element={<Main/>}>
-              <Route path='/Main/Vacancy' element={<Vacancy/>} />    
-              <Route path='/Main/Cv' element={<Cv/>} />
-              <Route path='/Main/Signup' element={<Reg/>} />
-              <Route path='/Main/Signin' element={<Login/>} />
-            </Route>  
-          </Routes>    
+ 
           {/* <Routes>  
             <Route path='/Dashboard' element={<Dashboard />} />    
           </Routes>     */}
-        </Router>  
     </div>
     )
   }

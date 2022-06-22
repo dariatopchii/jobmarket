@@ -1,14 +1,11 @@
-import logo from './logo.svg';
 import * as React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link, Component} from "react-router-dom";
-import Button from '@mui/material/Button';
-import Header from './Header/Header.js';
+import {BrowserRouter as Router, Route, Link, Component, Routes} from "react-router-dom";
 import Main from './Main/Main.js';
-import Footer from './Footer/Footer.js';
 import Login from './Main/Login.js';  
 import Reg from './Main/Reg.js';  
-import Dashboard from './Main/Dashboard.js';  
+import Vacancy from "./Vacancy";
+import Cv from "./Cv";
+import {Layout} from "./Layout";  
 
  
 
@@ -23,9 +20,15 @@ export default class App extends React.Component {
   render(){
     return (
       <div>
-        <Header/>
-        <Main/>
-        <Footer/>
+        <Layout>
+            <Routes>
+                <Route path='/Main' element={<Main/>}/>
+                <Route path='/Vacancy' element={<Vacancy/>} />
+                <Route path='/Cv' element={<Cv/>} />
+                <Route path='/Signup' element={<Reg/>} />
+                <Route path='/Login' element={<Login/>} />
+            </Routes>
+        </Layout>
       </div>
     );
   }

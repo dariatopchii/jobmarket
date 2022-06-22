@@ -25,7 +25,7 @@ export default class Reg extends Component {
     this.setState({ Name: event.target.value })
   }
   register(event) {
-    fetch('https://localhost:5001/api/User?email=as&password=as&userName=as', {
+    fetch('https://localhost:5001/api/User', {
       method: 'post',
       headers: {
         'Accept': '*/*',
@@ -36,9 +36,9 @@ export default class Reg extends Component {
         password: this.state.Password,
         email: this.state.Email,
       })
-    }).then((Response) => Response.json())
-      .then((Result) => {
-        if (Result.Status == 'Success')
+    }).then((resp) => resp.json())
+      .then((result) => {
+        if (result.status === 'Success')
                 alert("yay")
         else
           alert('Unauthenticated User!')
