@@ -20,7 +20,7 @@ export default class Cv extends React.Component{
     }
     Cv(event) {
         debugger;
-        fetch('http://localhost:5001/Api/Cv/Get', {
+        fetch('http://localhost:5001/Api/Cv', {
             method: 'get',
             headers: {
                 'Accept':  '*/*',

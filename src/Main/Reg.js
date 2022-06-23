@@ -1,47 +1,50 @@
 import React, { Component } from 'react';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import data from "bootstrap/js/src/dom/data";
 export default class Reg extends Component {
   constructor() {
     super();
     this.state = {
-      Name: '',
-      Email: '',
-      Password: '',
+      name: '',
+      email: '',
+      password: '',
     }
-    this.Email = this.Email.bind(this);
-    this.Password = this.Password.bind(this);
-    this.Name = this.Name.bind(this);
+    this.email = this.email.bind(this);
+    this.password = this.password.bind(this);
+    this.name = this.name.bind(this);
     this.register = this.register.bind(this);
   }
-  Email(event) {
-    this.setState({ Email: event.target.value })
+  email(event) {
+    this.setState({ email: event.target.value })
   }
 
-  Password(event) {
-    this.setState({ Password: event.target.value })
+  password(event) {
+    this.setState({ password: event.target.value })
   }
 
- Name(event) {
-    this.setState({ Name: event.target.value })
+  name(event) {
+    this.setState({ name: event.target.value })
   }
   register(event) {
-    fetch('https://localhost:5001/api/User', {
+    fetch('https://localhost:5001/api/User/Signup', {
       method: 'post',
       headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: this.state.Name,
-        password: this.state.Password,
-        email: this.state.Email,
+        name: this.state.name,
+        password: this.state.password,
+        email: this.state.email,
       })
-    }).then((resp) => resp.json())
-      .then((result) => {
-        if (result.status === 'Success')
-                alert("yay")
-        else
-          alert('Unauthenticated User!')
+    }).then((Response) => Response.json())
+      .then((Result) => {
+        // if (Result.statusCode === 200) {
+          (localStorage.setItem('user', JSON.stringify(Result)))
+          console.log(localStorage)
+        // }
+        // else
+        //   alert('Unauthenticated User!')
       })
   }
   render() {
@@ -57,14 +60,14 @@ export default class Reg extends Component {
                     <div className="row, mb-2 pageheading">
                     </div>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.Name} placeholder="Enter Employee Name" />
+                      <Input type="text"  onChange={this.name} placeholder="Enter Employee Name" />
                     </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.Email} placeholder="Enter Email" />
+                      <Input type="text" onChange={this.email} placeholder="Enter email" />
 
                     </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input type="password"  onChange={this.Password} placeholder="Enter Password" />
+                      <Input type="password"  onChange={this.password} placeholder="Enter Password" />
                     </InputGroup>
                     <Button  onClick={this.register}  color="success" block>Create Account</Button>
                   </Form>

@@ -7,38 +7,51 @@ export default class Login extends Component {
 
         super();
         this.state = {
-            Email: '',
-            Password: ''
+            email: '',
+            password: ''
         }
-        this.Password = this.Password.bind(this);
-        this.Email = this.Email.bind(this);
+        this.password = this.password.bind(this);
+        this.email = this.email.bind(this);
         this.login = this.login.bind(this);
     }
-    Email(event) {
-        this.setState({Email: event.target.value })
+    email(event) {
+        this.setState({email: event.target.value })
     }
-    Password(event) {
-        this.setState({Password: event.target.value })
+    password(event) {
+        this.setState({password: event.target.value })
     }
+    /* constructor(props) {
+    super(props)
+  }
+  componentDidMount() {
+    const apiUrl = 'https://localhost:5001/api/Cv';
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => console.log('This is your data', data));
+  }
+  render() {
+    return <h1>my Component has Mounted, Check the browser 'console' </h1>;
+  }
+  */
+     
     login(event) {
-        debugger;
-        fetch('http://localhost:5001/Api/User/Login', {
-            method: 'get',
+        fetch('https://localhost:5001/api/User/Login', {
+            method: 'post',
             headers: {
-                'Accept': 'application/json',
+                'Accept': '*/*',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: this.state.Email,
-                password: this.state.Password
+                password: this.state.password,
+                email: this.state.email,
             })
-        }).then(Response => Response.json())
-            .then(result => {
-                console.log(result);
-                if (result.Status == 'Invalid')
-                    alert('Invalid User');
+        })
+            .then(response => {
+                if (response.status !== 200)
+                    alert('Invalid User')
                 else
-                    this.props.history.push("/Dashboard");
+                    console.log(response.json() );
+                    // this.props.history.push("/Dashboard");
             })
     }
     render() {
@@ -51,16 +64,11 @@ export default class Login extends Component {
                                 <Card className="p-2">
                                     <CardBody>
                                         <Form>
-                                            <div class="row" className="mb-2 pageheading">
-                                                <div class="col-sm-12 btn btn-primary">
-                                                    Login
-                             </div>
-                                            </div>
                                             <InputGroup className="mb-3">
-                                                <Input type="text" onChange={this.Email} placeholder="Enter Email" />
+                                                <Input type="text" onChange={this.email} placeholder="Enter email" />
                                             </InputGroup>
                                             <InputGroup className="mb-4">
-                                                <Input type="password" onChange={this.Password} placeholder="Enter Password" />
+                                                <Input type="password" onChange={this.password} placeholder="Enter Password" />
                                             </InputGroup>
                                             <Button onClick={this.login} color="success" block>Login</Button>
                                         </Form>
