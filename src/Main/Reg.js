@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import data from "bootstrap/js/src/dom/data";
+import { Navigate } from 'react-router';
+
 export default class Reg extends Component {
   constructor() {
     super();
@@ -8,6 +9,7 @@ export default class Reg extends Component {
       name: '',
       email: '',
       password: '',
+      toMain: null,
     }
     this.email = this.email.bind(this);
     this.password = this.password.bind(this);
@@ -25,6 +27,7 @@ export default class Reg extends Component {
   name(event) {
     this.setState({ name: event.target.value })
   }
+  
   register(event) {
     fetch('https://localhost:5001/api/User/Signup', {
       method: 'post',
@@ -37,21 +40,38 @@ export default class Reg extends Component {
         password: this.state.password,
         email: this.state.email,
       })
-    }).then((Response) => Response.json())
-      .then((Result) => {
-        // if (Result.statusCode === 200) {
-          (localStorage.setItem('user', JSON.stringify(Result)))
+    }).then((response) => {
+        console.log(response)
+        if (response.status === 200) {
+          this.setState({
+            toMain: true
+          })
+          return response.json()
+        }
+        else if (Response.status === 400) {
+          console.log(13141)
+          this.setState({
+            toMain: false
+          })
+          return Promise.reject()
+        }
+        else {
+          console.log("ew")
+          return Promise.reject()
+        }
+      }
+  )
+        .then((data) => {
+          localStorage.setItem('user', JSON.stringify(data))
           console.log(localStorage)
-        // }
-        // else
-        //   alert('Unauthenticated User!')
-      })
+            }
+        )
   }
-  render() {
+  
+  render(){
     return (
       <div className="app flex-row align-items-center">
-
-        <Container>
+          <Container>
           <Row className="justify-content-center">
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">
@@ -69,13 +89,14 @@ export default class Reg extends Component {
                     <InputGroup className="mb-3">
                       <Input type="password"  onChange={this.password} placeholder="Enter Password" />
                     </InputGroup>
-                    <Button  onClick={this.register}  color="success" block>Create Account</Button>
+                    <Button  onClick={() => this.register()}  color="success" block>Create Account</Button>
                   </Form>
                 </CardBody>
               </Card>
             </Col>
           </Row>
         </Container>
+        {this.toMain && <Navigate to = '/Cv' replace={true}/>}
       </div>
 
     );

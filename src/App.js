@@ -1,16 +1,11 @@
 import * as React from 'react';
-import {BrowserRouter as Router, Route, Link, Component, Routes} from "react-router-dom";
 import Main from './Main/Main.js';
 import Login from './Main/Login.js';  
 import Reg from './Main/Reg.js';  
 import Vacancy from "./Vacancy";
 import Cv from "./Cv";
-import {Layout} from "./Layout";  
-
- 
-
-
-
+import {Layout} from "./Layout";
+import { Route, Routes } from 'react-router';
 
 export default class App extends React.Component {
   // constructor(props) {
@@ -21,7 +16,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Layout>
-            <Routes>
+            <Routes>  
                 <Route path='/Main' element={<Main/>}/>
                 <Route path='/Vacancy' element={<Vacancy/>} />
                 <Route path='/Cv' element={<Cv/>} />

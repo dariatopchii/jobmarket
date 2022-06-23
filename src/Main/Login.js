@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Main.css';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import {Navigate} from "react-router";
 export default class Login extends Component {
     constructor() {
 
         super();
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            toMain: null,
         }
+        
         this.password = this.password.bind(this);
         this.email = this.email.bind(this);
         this.login = this.login.bind(this);
@@ -20,19 +23,6 @@ export default class Login extends Component {
     password(event) {
         this.setState({password: event.target.value })
     }
-    /* constructor(props) {
-    super(props)
-  }
-  componentDidMount() {
-    const apiUrl = 'https://localhost:5001/api/Cv';
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => console.log('This is your data', data));
-  }
-  render() {
-    return <h1>my Component has Mounted, Check the browser 'console' </h1>;
-  }
-  */
      
     login(event) {
         fetch('https://localhost:5001/api/User/Login', {
@@ -46,13 +36,32 @@ export default class Login extends Component {
                 email: this.state.email,
             })
         })
-            .then(response => {
-                if (response.status !== 200)
-                    alert('Invalid User')
-                else
-                    console.log(response.json() );
-                    // this.props.history.push("/Dashboard");
-            })
+            .then((response) => {
+                    console.log(response)
+                    if (response.status === 200) {
+                        this.setState({
+                            toMain: true
+                        })
+                        return response.json()
+                    }
+                    else if (Response.status === 400) {
+                        console.log(13141)
+                        this.setState({
+                            toMain: false
+                        })
+                        return Promise.reject()
+                    }
+                    else {
+                        console.log("ew")
+                        return Promise.reject()
+                    }
+                }
+            )
+            .then((data) => {
+                    localStorage.setItem('user', JSON.stringify(data))
+                    console.log(localStorage)
+                }
+            )
     }
     render() {
         return (
@@ -70,7 +79,7 @@ export default class Login extends Component {
                                             <InputGroup className="mb-4">
                                                 <Input type="password" onChange={this.password} placeholder="Enter Password" />
                                             </InputGroup>
-                                            <Button onClick={this.login} color="success" block>Login</Button>
+                                            <Button onClick={() => this.login()} color="success" block>Login</Button>
                                         </Form>
                                     </CardBody>
                                 </Card>
@@ -78,6 +87,7 @@ export default class Login extends Component {
                         </Col>
                     </Row>
                 </Container>
+                {this.toMain && <Navigate to = '/Cv' replace={true}/>}
             </div>
         );
     }
