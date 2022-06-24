@@ -11,6 +11,7 @@ import CreateCv from './CreateCv';
 import UserCv from './UserCv'
 import EditCv from './EditCv'
 import Home from './Home'
+import Logout from './Logout'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ export default class App extends React.Component {
                 <Route path='/Cv' element={<Cv/>} />
                 <Route path='/Signup' element={<Reg/>} />
                 <Route path='/Login' element={<Login/>} />
+                <Route path='/Logout' element={<Logout/>} />
                 <Route path='/UserPage' element={<UserPage/>} />
                 <Route path='/UserPage/CreateCv' element={<CreateCv/>} /> 
                 <Route path='/UserPage/UserCv' element={<UserCv/>} /> 

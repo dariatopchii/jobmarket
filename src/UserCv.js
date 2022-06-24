@@ -54,6 +54,10 @@ class UserCv extends React.Component {
     this.setState({userCvs: result})
   }
 
+  redirect(cv){
+    localStorage.setItem('cv', JSON.stringify(cv))
+    console.log(localStorage)
+  }
 
   render() {
     console.log(JSON.parse(localStorage.getItem('user')).id)
@@ -77,7 +81,7 @@ class UserCv extends React.Component {
                 </Col>
                 <Col>
                   <Link to="/UserPage/UserCv/Edit">
-                    <Button>Редагування</Button>
+                    <Button onClick={() => this.redirect(cv)}>Редагування</Button>
                   </Link>
                   <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
                   <Button>Архівація</Button>

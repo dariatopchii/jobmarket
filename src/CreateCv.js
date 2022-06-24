@@ -144,10 +144,10 @@ export default class CreateCv extends Component {
                       <Input type="text"  onChange={this.position} placeholder="Посада" />
                     </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input type="text" aria-multiline onChange={this.location} placeholder="Місто"></Input>
+                      <Input type="text" aria-multiline onChange={this.workplace} placeholder="Місто"></Input>
                     </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.description} placeholder="Надайте, будь ласка, інформацію про вас" />
+                      <Input type="text"  onChange={this.description} placeholder="Додаткова інформація" />
                     </InputGroup>
                     <Button  onClick={() => this.create()}  color="success" block>Create CV</Button>
                   </Form>

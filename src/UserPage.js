@@ -7,22 +7,30 @@ import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, In
 export default class UserPage extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+        email: JSON.parse(localStorage.getItem('user')).email
+    }
   }
 
   render(){
     return (
       <div>
-        <List>
+        <div>
+          <b>Email: {this.state.email}</b>
+        </div>
+        <div>
+          <List>
             <Link to="/UserPage/CreateCv">
             <Button color="success" padding = '5em'block>Створити резюме</Button>
             </Link>
           <Link to="/UserPage/UserCv">
-          <Button color="success" padding = '5em' block>Побачити свої резюме</Button>
+          <Button  color="success" padding = '5em' block>Побачити свої резюме</Button>
         </Link>
         <Button>Створити вакансію</Button>
         <Button>Подивитися свої вакансії</Button>
-        </List>      
+        </List>    
+        </div>
+        
       </div>
     );
   }
