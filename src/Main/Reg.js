@@ -43,9 +43,6 @@ export default class Reg extends Component {
     }).then((response) => {
         console.log(response)
         if (response.status === 200) {
-          this.setState({
-            toMain: true
-          })
           return response.json()
         }
         else if (Response.status === 400) {
@@ -63,6 +60,9 @@ export default class Reg extends Component {
   )
         .then((data) => {
           localStorage.setItem('user',  JSON.stringify(data))
+          this.setState({
+            toMain: true
+          })
           console.log(localStorage)
             }
         )
