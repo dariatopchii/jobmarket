@@ -28,9 +28,14 @@ class Header extends React.Component {
     async waitForUpdates(){
       while (true){
           await Header.sleep(1000);
-          if(localStorage.getItem('user')){
+          if(!this.state.userLoggedIn && localStorage.getItem('user')){
               this.setState({
                   userLoggedIn: true
+              })
+          }
+          if(this.state.userLoggedIn && !localStorage.getItem('user')){
+              this.setState({
+                  userLoggedIn: false
               })
           }
       }
