@@ -22,7 +22,7 @@ class Cv extends React.Component {
       });
   }
   render() {
-    const cvs = this.state.cvs
+    const cvs = this.state.cvs      
     return (
         <div>
             {cvs.map(cv => (
