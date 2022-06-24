@@ -62,13 +62,14 @@ export default class Reg extends Component {
       }
   )
         .then((data) => {
-          localStorage.setItem('user', JSON.stringify(data))
+          localStorage.setItem('user',  JSON.stringify(data))
           console.log(localStorage)
             }
         )
   }
   
   render(){
+  
     return (
       <div className="app flex-row align-items-center">
           <Container>
@@ -96,7 +97,7 @@ export default class Reg extends Component {
             </Col>
           </Row>
         </Container>
-        {this.toMain && <Navigate to = '/Cv' replace={true}/>}
+        {this.state.toMain && <Navigate to = '/UserPage' replace={true}/>}
       </div>
 
     );

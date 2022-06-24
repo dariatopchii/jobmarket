@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Main.css';
+import { Link } from 'react-router-dom'
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import {Navigate} from "react-router";
 export default class Login extends Component {
@@ -10,7 +11,8 @@ export default class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            toMain: null,
+            toUser: null,
+            isLoggenIn: false
         }
         
         this.password = this.password.bind(this);
@@ -40,19 +42,25 @@ export default class Login extends Component {
                     console.log(response)
                     if (response.status === 200) {
                         this.setState({
-                            toMain: true
+                            toUser: true,
+                            isLoggenIn: true
                         })
                         return response.json()
                     }
                     else if (Response.status === 400) {
                         console.log(13141)
                         this.setState({
-                            toMain: false
+                            toUser: false,
+                            isLoggenIn: false
                         })
                         return Promise.reject()
                     }
                     else {
                         console.log("ew")
+                        this.setState({
+                            toMain: false,
+                            isLoggenIn: false
+                        })
                         return Promise.reject()
                     }
                 }
@@ -80,6 +88,9 @@ export default class Login extends Component {
                                                 <Input type="password" onChange={this.password} placeholder="Enter Password" />
                                             </InputGroup>
                                             <Button onClick={() => this.login()} color="success" block>Login</Button>
+                                            <Link to="/Signup">
+                                                <Button color="success" block>Signup</Button>
+                                            </Link>
                                         </Form>
                                     </CardBody>
                                 </Card>
@@ -87,7 +98,7 @@ export default class Login extends Component {
                         </Col>
                     </Row>
                 </Container>
-                {this.toMain && <Navigate to = '/Cv' replace={true}/>}
+                {this.state.toUser && <Navigate to = '/UserPage' replace={true}/>}
             </div>
         );
     }

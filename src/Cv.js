@@ -1,6 +1,7 @@
 import React from 'react';
 import data from "bootstrap/js/src/dom/data";
 import {Link} from "react-router-dom";
+import './Cv.css';
 
 class Cv extends React.Component {
   constructor(props) {
@@ -25,21 +26,23 @@ class Cv extends React.Component {
     return (
         <div>
             {cvs.map(cv => (
-                <div key={'/' + cv.url + '_div'}>
-                    <Link to={'/' + cv.url}>
-                        <h4>{cv.position}</h4>
-                    </Link>
-                    <p>{cv.salary}</p>
-                    <p>{cv.location}</p>
-                    <p>{cv.userId}</p>
+                <div key={'/' + cv.id + '_div'} className='cvOutLine'>
+                    <p><b>{cv.occupation}</b></p>
+                    <p>Email {cv.email}</p>
+                    <p>Імʼя {cv.name}</p>
+                    <p>Стать {cv.gender}</p>
+                    <p>Місто пошуку {cv.location}</p>
+                    <p>Бажана заробітня плата {cv.salary}</p>
+                    <p>Освіта {cv.education}</p>
+                    <p>Інформація щодо останнього працевлаштування</p>
+                    <p>Місто{cv.workplace}</p>
+                    <p>Фірма {cv.firm}</p>
+                    <p>Посада {cv.position}</p>
+                    <p>{cv.description}</p>
+                    <p>{cv.requirements}</p>
                 </div>
             ))}
         </div>
-        
-        /*{list.map(({ key, value }) => (
-    <div key={key}>{value}</div>
-    
-))}*/
     )
   }
 }
