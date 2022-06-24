@@ -17,7 +17,7 @@ class Header extends React.Component {
         super(props)
 
         this.state = {
-            userLoggedIn: false
+            userLoggedIn: localStorage.getItem('user') !== null
         }
     }
     
