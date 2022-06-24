@@ -30,6 +30,7 @@ export default class CreateCv extends Component {
     this.salary = this.salary.bind(this);
     this.description = this.description.bind(this);
     this.edit = this.edit.bind(this);  
+    this.removeCv = this.removeCv.bind(this);
   }
   gender(event) {
     this.setState({ gender: event.target.value })
@@ -64,7 +65,7 @@ export default class CreateCv extends Component {
 
   edit(event) {
     fetch('https://localhost:5001/api/Cv', {
-      method: 'post',
+      method: 'put',
       headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json'
@@ -86,6 +87,9 @@ export default class CreateCv extends Component {
     }).then((response) => {
         console.log(response)
         if (response.status === 200) {
+          console.log(localStorage)
+          localStorage.removeItem('cv')
+          console.log(localStorage)
           this.setState({
             toUser: true
           })
@@ -105,6 +109,11 @@ export default class CreateCv extends Component {
       }
   )
   }
+
+  removeCv(){
+    console.log(2)
+    localStorage.removeItem('cv')
+  }
   
   render(){
   
@@ -116,8 +125,8 @@ export default class CreateCv extends Component {
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form>
-                      <Link to="/UserPage">
-                        <Button>Повернутися до останньої сторонки</Button>
+                      <Link to="/UserPage/UserCv">
+                        <Button onClick={() => this.removeCv}>Повернутися до останньої сторонки</Button>
                       </Link>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.location} defaultValue= {this.state.location} />
@@ -149,14 +158,14 @@ export default class CreateCv extends Component {
                     <InputGroup className="mb-3">
                       <Input type="text"  onChange={this.description} defaultValue="Надайте, будь ласка, інформацію про вас" />
                     </InputGroup>
-                    <Button  onClick={() => this.create()}  color="success" block>Змінити</Button>
+                    <Button  onClick={() => this.removeCv}  color="success" block>Змінити</Button>
                   </Form>
                 </CardBody>
               </Card>
             </Col>
           </Row>
         </Container>
-        {this.state.toUser && <Navigate to = '/UserPage' replace={true}/>}
+        {this.state.toUser && <Navigate to = '/UserPage/UserCv' replace={true}/>}
       </div>
 
     );
@@ -164,14 +173,3 @@ export default class CreateCv extends Component {
   }
 
 }
-
-
-
-
-// {/* <TextField
-//           id="filled-helperText"
-//           label="Helper text"
-//           defaultValue="Default Value"
-//           helperText="Some important text"
-//           variant="filled" */}
-          

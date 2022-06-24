@@ -59,36 +59,45 @@ class UserCv extends React.Component {
     console.log(localStorage)
   }
 
-  render() {
+  render() { 
+    console.log(localStorage)
     console.log(JSON.parse(localStorage.getItem('user')).id)
     const userCvs = this.state.userCvs
     return (
-            <div>{userCvs.map(cv => (
-              <Row className='cvOutLine'>
-                <Col key={'/' + cv.id + '_div'}>
-                    <p><b>{cv.occupation}</b></p>
-                    <p>{cv.email}</p>
-                    <p>{cv.name}</p>
-                    <p>{cv.gender}</p>
-                    <p>{cv.location}</p>
-                    <p>{cv.education}</p>
-                    <p>{cv.workplace}</p>
-                    <p>{cv.firm}</p>
-                    <p>{cv.position}</p>
-                    <p>{cv.salary}</p>
-                    <p>{cv.description}</p>
-                    <p>{cv.requirements}</p>
-                </Col>
-                <Col>
-                  <Link to="/UserPage/UserCv/Edit">
-                    <Button onClick={() => this.redirect(cv)}>Редагування</Button>
-                  </Link>
-                  <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
-                  <Button>Архівація</Button>
-                </Col>
-              </Row>
-            ))}
-            </div>   
+      <div>
+        <div>
+        <Link to="/UserPage">
+                        <Button>Повернутися до останньої сторонки</Button>
+        </Link>
+        </div>
+        <div>{userCvs.map(cv => (
+        <Row className='cvOutLine'>
+          <Col key={'/' + cv.id + '_div'}>
+              <p><b>{cv.occupation}</b></p>
+              <p>{cv.email}</p>
+              <p>{cv.name}</p>
+              <p>{cv.gender}</p>
+              <p>{cv.location}</p>
+              <p>{cv.education}</p>
+              <p>{cv.workplace}</p>
+              <p>{cv.firm}</p>
+              <p>{cv.position}</p>
+              <p>{cv.salary}</p>
+              <p>{cv.description}</p>
+              <p>{cv.requirements}</p>
+          </Col>
+          <Col>
+            <Link to="/UserPage/UserCv/Edit">
+              <Button onClick={() => this.redirect(cv)}>Редагування</Button>
+            </Link>
+            <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
+            <Button>Архівація</Button>
+          </Col>
+        </Row>
+        ))}
+        </div> 
+      </div>
+              
     )
   }
 }

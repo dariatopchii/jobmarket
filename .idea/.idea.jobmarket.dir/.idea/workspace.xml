@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17871572-8de8-478c-87a9-a308dc6e12cc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Cv.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cv.js" afterDir="false" />
+    <list default="true" id="17871572-8de8-478c-87a9-a308dc6e12cc" name="Changes" comment="new">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.jobmarket.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.jobmarket.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EditCv.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/EditCv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserCv.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserCv.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
