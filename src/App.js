@@ -12,27 +12,22 @@ import UserCv from './UserCv'
 import EditCv from './EditCv'
 import Home from './Home'
 import Logout from './Logout'
-import GooglePlaceAutocomplete from 'material-ui-autocomplete-google-places';
+
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  getCoords(lat, lng){
-    console.log(lat, lng);
-  }
+  // getCoords(lat, lng){
+  //   console.log(lat, lng);
+  // }
   
   render(){
     return (
       <div>
-         <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <GooglePlaceAutocomplete
-        	// Function to return lat and lng
-        	results={this.getCoords}
-        />
-      </MuiThemeProvider>
         <Layout>
             <Routes>  
+                <Route path='/SendEmail' element={<SendEmail/>}/>
                 <Route path='/Home' element={<Home/>}/>
                 <Route path='/Main' element={<Main/>}/>
                 <Route path='/Vacancy' element={<Vacancy/>} />
