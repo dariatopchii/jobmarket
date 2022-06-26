@@ -21,16 +21,19 @@ export default class UserPage extends React.Component {
         <div>
           <List>
             <Link to="/UserPage/CreateCv">
-            <Button color="success" padding = '5em'block>Створити резюме</Button>
+              <Button color="success" padding = '5em'block>Створити резюме</Button>
             </Link>
-          <Link to="/UserPage/UserCv">
-          <Button  color="success" padding = '5em' block>Побачити свої резюме</Button>
-        </Link>
-        <Button>Створити вакансію</Button>
-        <Button>Подивитися свої вакансії</Button>
-        </List>    
-        </div>
-        
+            <Link to="/UserPage/UserCv">
+              <Button  color="success" padding = '5em' block>Побачити свої резюме</Button>
+            </Link>
+            <Link to="/UserPage/CreateVacancy">
+              <Button>Створити вакансію</Button>
+            </Link>
+            <Link>
+              <Button>Подивитися свої вакансії</Button>
+            </Link>
+          </List>    
+        </div>   
       </div>
     );
   }
