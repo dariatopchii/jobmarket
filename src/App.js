@@ -7,9 +7,12 @@ import Cv from "./Cv";
 import UserPage from "./UserPage/UserPage";
 import {Layout} from "./Layout";
 import { Route, Routes } from 'react-router';
-import CreateCv from './CreateCv';
+import CreateCv from './UserPage/CreateCv';
+import CreateVacancy from './UserPage/CreateVacancy';
 import UserCv from './UserPage/UserCv'
+import UserVacancy from './UserPage/UserVacancy'
 import EditCv from './UserPage/EditCv'
+import EditVacancy from './UserPage/EditVacancy'
 import Home from './Home'
 import SendEmail from './SendEmail'
 import CvArchive from './UserPage/CvArchive'
@@ -25,6 +28,9 @@ export default class App extends React.Component {
       <div>
         <Layout>
             <Routes>  
+                <Route path='/UserPage/UserVacancy' element={<UserVacancy/>}/>
+                <Route path='/UserPage/UserVacancy/EditVacancy' element={<EditVacancy/>}/>
+                <Route path='/UserPage/CreateVacancy' element={<CreateVacancy/>} /> 
                 <Route path='/SendEmail' element={<SendEmail/>}/>
                 <Route path='/Home' element={<Home/>}/>
                 <Route path='/Main' element={<Main/>}/>
