@@ -1,7 +1,7 @@
 import React from 'react';
 import data from "bootstrap/js/src/dom/data";
 import {Link} from "react-router-dom";
-import './Cv.css';
+import '../Cv.css';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
   
 class UserCv extends React.Component {
@@ -13,10 +13,11 @@ class UserCv extends React.Component {
     }
 
     this.delete = this.delete.bind(this);
+    this.unarchive = this.unarchive.bind(this);
   }
 
   componentDidMount() {
-    const apiUrl = 'https://localhost:5001/api/Cv/UserCvs?userId='+JSON.parse(localStorage.getItem('user')).id;
+    const apiUrl = 'https://localhost:5001/api/Cv/UserCvs?arch=true&userId='+JSON.parse(localStorage.getItem('user')).id;
     fetch(apiUrl)
       .then((response) => {
         console.log(response)
@@ -34,6 +35,27 @@ class UserCv extends React.Component {
     const apiUrl = 'https://localhost:5001/api/Cv/'+ cvId;
     console.log(apiUrl)
     fetch(apiUrl)
+      .then((response) => {
+        if(response.status === 200){
+          console.log('success')
+          this.removeCvFromArray(cvId)
+        }
+        else{
+          console.log('nope')
+        }
+        
+      }
+      )
+  }
+
+  unarchive(cvId){
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({id: cvId})
+    };
+    const apiUrl = 'https://localhost:5001/api/Cv/Archive';
+    fetch(apiUrl, requestOptions)
       .then((response) => {
         if(response.status === 200){
           console.log('success')
@@ -66,32 +88,30 @@ class UserCv extends React.Component {
     return (
       <div>
         <div>
-        <Link to="/UserPage">
-                        <Button>Повернутися до останньої сторонки</Button>
+        <Link to="/UserPage/UserCv">
+          <Button color="success" block>Повернутися до останньої сторонки</Button>
         </Link>
         </div>
         <div>{userCvs.map(cv => (
         <Row className='cvOutLine'>
           <Col key={'/' + cv.id + '_div'}>
               <p><b>{cv.occupation}</b></p>
-              <p>{cv.email}</p>
-              <p>{cv.name}</p>
-              <p>{cv.gender}</p>
-              <p>{cv.location}</p>
-              <p>{cv.education}</p>
-              <p>{cv.workplace}</p>
-              <p>{cv.firm}</p>
-              <p>{cv.position}</p>
-              <p>{cv.salary}</p>
-              <p>{cv.description}</p>
-              <p>{cv.requirements}</p>
+              <p><b>Email: </b> {cv.email}</p>
+                    <p><b>Імʼя: </b> {cv.name}</p>
+                    <p><b>Стать: </b> {cv.gender}</p>
+                    <p><b>Освіта: </b> {cv.education}</p>
+                    <p><b>Місто пошуку: </b> {cv.location}</p>
+                    <p><b>Бажана заробітня плата: </b>{cv.salary}</p>
+                    <p><b>Вимоги до нового місця праці: </b>{cv.requirements}</p>
+                    <p><b>Інформація щодо останнього працевлаштування</b></p>
+                    <p><b>Місто: </b>{cv.workplace}</p>
+                    <p><b>Фірма: </b> {cv.firm}</p>
+                    <p><b>Посада: </b> {cv.position}</p>
+                    <p><b>Опис: </b>{cv.description}</p>
           </Col>
           <Col>
-            <Link to="/UserPage/UserCv/Edit">
-              <Button onClick={() => this.redirect(cv)}>Редагування</Button>
-            </Link>
             <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
-            <Button>Архівація</Button>
+            <Button onClick={() => this.unarchive(cv.id)}>Відновлення</Button>
           </Col>
         </Row>
         ))}

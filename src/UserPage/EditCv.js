@@ -1,24 +1,28 @@
 import React, { Component,  TextField, } from 'react';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Navigate } from 'react-router';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {useLocation} from "react-router-dom";
 
-export default class CreateCv extends Component {
-  constructor() {
-    super();
+function funcEditCv(Component) {
+  return props => <Component {...props} location={useLocation()} />
+}
+
+class EditCv extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      gender: JSON.parse(localStorage.getItem('cv')).gender,
-      location: JSON.parse(localStorage.getItem('cv')).location,
-      occupation: JSON.parse(localStorage.getItem('cv')).occupation,
-      education: JSON.parse(localStorage.getItem('cv')).education,
-      workplace: JSON.parse(localStorage.getItem('cv')).workplace,
-      firm: JSON.parse(localStorage.getItem('cv')).firm,
-      position: JSON.parse(localStorage.getItem('cv')).position,
-      salary: JSON.parse(localStorage.getItem('cv')).salary,
-      description: JSON.parse(localStorage.getItem('cv')).description,
+      gender: '',
+      location: '',
+      occupation: '',
+      education: '',
+      workplace: '',
+      firm: '',
+      position: '',
+      salary: '',
+      description: '',
       toUser: null,
     }
-
 
     this.gender = this.gender.bind(this);
     this.location = this.location.bind(this);
@@ -29,14 +33,13 @@ export default class CreateCv extends Component {
     this.position = this.position.bind(this);
     this.salary = this.salary.bind(this);
     this.description = this.description.bind(this);
-    this.edit = this.edit.bind(this);  
-    this.removeCv = this.removeCv.bind(this);
+    this.edit = this.edit.bind(this);
   }
   gender(event) {
     this.setState({ gender: event.target.value })
   }
   location(event) {
-    this.setState({ location: event.target.value })
+    this.setState({ city: event.target.value })
   }
   occupation(event) {
     this.setState({ occupation: event.target.value })
@@ -84,12 +87,10 @@ export default class CreateCv extends Component {
         description: this.state.description,
         userId: JSON.parse(localStorage.getItem('user')).id
       })
-    }).then((response) => {
+    })
+    .then((response) => {
         console.log(response)
         if (response.status === 200) {
-          console.log(localStorage)
-          localStorage.removeItem('cv')
-          console.log(localStorage)
           this.setState({
             toUser: true
           })
@@ -99,12 +100,14 @@ export default class CreateCv extends Component {
           this.setState({
             toUser: false
           })
+          console.log('no')
         }
         else {
           console.log("something is wrong")
           this.setState({
             toUser: false
           })
+          console.log('no')
         }
       }
   )
@@ -116,7 +119,8 @@ export default class CreateCv extends Component {
   }
   
   render(){
-  
+    const cv = this.props.location.state.cv
+    console.log(cv)
     return (
       <div className="app flex-row align-items-center">
           <Container>
@@ -129,36 +133,36 @@ export default class CreateCv extends Component {
                         <Button onClick={() => this.removeCv}>Повернутися до останньої сторонки</Button>
                       </Link>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.location} defaultValue= {this.state.location} />
+                        <Input type="text"  onChange={this.location} defaultValue= {cv.location} />
                       </InputGroup>
                       <InputGroup className="mb-3">
-                      <Input  type="number" onChange={this.salary} defaultValue={this.state.salary}  />
+                      <Input  type="number" onChange={this.salary} defaultValue={cv.salary}  />
                     </InputGroup>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.occupation} defaultValue={this.state.occupation}  />
+                        <Input type="text"  onChange={this.occupation} defaultValue={cv.occupation}  />
                       </InputGroup>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.education} defaultValue={this.state.education}  />
+                        <Input type="text"  onChange={this.education} defaultValue={cv.education}  />
                       </InputGroup>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.gender} defaultValue={this.state.gender}  />
+                        <Input type="text"  onChange={this.gender} defaultValue={cv.gender}  />
                       </InputGroup>
                       <b>
                         Інформація про останнє місце працевлаштування
                       </b>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.firm} defaultValue={this.state.firm} />
+                        <Input type="text"  onChange={() => this.firm} defaultValue={cv.firm} />
                       </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.position} defaultValue={this.state.position}  />
+                      <Input type="text"  onChange={this.position} defaultValue={cv.position}  />
                     </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input type="text" aria-multiline onChange={this.workplace} defaultValue="Місто"></Input>
+                      <Input type="text" aria-multiline onChange={this.workplace} defaultValue={cv.workplace}></Input>
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <Input type="text"  onChange={this.description} defaultValue="Надайте, будь ласка, інформацію про вас" />
                     </InputGroup>
-                    <Button  onClick={() => this.removeCv}  color="success" block>Змінити</Button>
+                    <Button  onClick={() => this.edit()}  color="success" block>Змінити</Button>
                   </Form>
                 </CardBody>
               </Card>
@@ -173,3 +177,5 @@ export default class CreateCv extends Component {
   }
 
 }
+
+export default funcEditCv(EditCv)

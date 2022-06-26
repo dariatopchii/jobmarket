@@ -12,7 +12,6 @@ export default class Login extends Component {
             email: '',
             password: '',
             toUser: null,
-            isLoggenIn: false
         }
         
         this.password = this.password.bind(this);
@@ -41,17 +40,12 @@ export default class Login extends Component {
             .then((response) => {
                     console.log(response)
                     if (response.status === 200) {
-                        this.setState({
-                            toUser: true,
-                            isLoggenIn: true
-                        })
                         return response.json()
                     }
                     else if (Response.status === 400) {
                         console.log(13141)
                         this.setState({
                             toUser: false,
-                            isLoggenIn: false
                         })
                         return Promise.reject()
                     }
@@ -59,7 +53,6 @@ export default class Login extends Component {
                         console.log("ew")
                         this.setState({
                             toMain: false,
-                            isLoggenIn: false
                         })
                         return Promise.reject()
                     }
@@ -67,6 +60,9 @@ export default class Login extends Component {
             )
             .then((data) => {
                     localStorage.setItem('user', JSON.stringify(data))
+                    this.setState({
+                        toUser: true,
+                    })
                     console.log(localStorage)
                 }
             )

@@ -16,6 +16,7 @@ export default class Reg extends Component {
     this.name = this.name.bind(this);
     this.register = this.register.bind(this);
   }
+  
   email(event) {
     this.setState({ email: event.target.value })
   }

@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.8.2",
     "@mui/material": "^5.8.2",
     "@mui/styled-engine-sc": "^5.8.0",
+    "@syncfusion/ej2-react-grids": "^20.1.61",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

@@ -4,23 +4,21 @@ import Login from './Main/Login.js';
 import Reg from './Main/Reg.js';  
 import Vacancy from "./Vacancy";
 import Cv from "./Cv";
-import UserPage from "./UserPage";
+import UserPage from "./UserPage/UserPage";
 import {Layout} from "./Layout";
 import { Route, Routes } from 'react-router';
 import CreateCv from './CreateCv';
-import UserCv from './UserCv'
-import EditCv from './EditCv'
+import UserCv from './UserPage/UserCv'
+import EditCv from './UserPage/EditCv'
 import Home from './Home'
-import Logout from './Logout'
+import SendEmail from './SendEmail'
+import CvArchive from './UserPage/CvArchive'
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  // getCoords(lat, lng){
-  //   console.log(lat, lng);
-  // }
   
   render(){
     return (
@@ -34,10 +32,10 @@ export default class App extends React.Component {
                 <Route path='/Cv' element={<Cv/>} />
                 <Route path='/Signup' element={<Reg/>} />
                 <Route path='/Login' element={<Login/>} />
-                <Route path='/Logout' element={<Logout/>} />
                 <Route path='/UserPage' element={<UserPage/>} />
                 <Route path='/UserPage/CreateCv' element={<CreateCv/>} /> 
-                <Route path='/UserPage/UserCv' element={<UserCv/>} /> 
+                <Route path='/UserPage/UserCv' element={<UserCv/>} />
+                <Route path='/UserPage/UserCv/Archive' element={<CvArchive/>} /> 
                 <Route path='/UserPage/UserCv/Edit' element={<EditCv/>} />
             </Routes>
         </Layout>

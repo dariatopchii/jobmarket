@@ -1,6 +1,7 @@
 import { Button } from 'bootstrap';
 import React, { Component,  TextField, } from 'react';
 import { Form, Input } from 'reactstrap';
+import {useLocation} from "react-router-dom";
 
 function sendEmail(Component) {
     return props => <Component {...props} location={useLocation()} />

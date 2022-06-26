@@ -1,15 +1,7 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@mui/material/Button';
-import Logo from '../logo.png';
+import Logo from '../logo/logo.png';
 import './Header.css';
-import Login from '../Main/Login.js';  
-import Reg from '../Main/Reg.js';  
-import Dashboard from '../Main/Dashboard.js';  
-import Cv from '../Cv.js';
-import Vacancy from '../Vacancy.js';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Main from '../Main/Main.js';
 
 class Header extends React.Component {
 
@@ -35,7 +27,7 @@ class Header extends React.Component {
           }
           if(this.state.userLoggedIn && !localStorage.getItem('user')){
               this.setState({
-                  userLoggedIn: false
+                  userLoggedIn: false,
               })
           }
       }
@@ -48,19 +40,26 @@ class Header extends React.Component {
     render() {
     return(
       <div className='headerContainer'>
-            <div className="logo">
+            <Link to='/Home' className="logo">
               <img src={Logo} alt="websiteLogo"/>
-            </div>
+            </Link>
             <div className="nav-item">
               <Link to='/Vacancy' className="nav-link"><p>Вакансії</p></Link>
             </div>
             <div className="nav-item">    
               <Link to='/Cv' className="nav-link"><p>Резюме</p></Link>   
             </div>
+            {
+              this.state.userLoggedIn
+              ? (<div className="nav-item">
+                      <Link to='/UserPage' className="nav-link"><p>Профіль</p></Link>
+                  </div>) 
+              : <></>
+          }
           {
               this.state.userLoggedIn
               ? (<div className="nav-item">
-                      <Link to='/Logout' className="nav-link"><p>Logout</p></Link>
+                      <Link to='/Home' className="nav-link"><p>Logout</p></Link>
                   </div>) 
               : <></>
           }

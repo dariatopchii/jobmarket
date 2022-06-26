@@ -3,7 +3,12 @@ import * as React from 'react';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
+    localStorage.clear();
   }
+
+  componentDidMount(){
+    console.log(localStorage)
+}
   
   render(){
     return (

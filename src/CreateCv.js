@@ -2,6 +2,8 @@ import React, { Component,  TextField, } from 'react';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Navigate } from 'react-router';
 import { Link } from 'react-router-dom'
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 export default class CreateCv extends Component {
   constructor() {
@@ -107,6 +109,7 @@ export default class CreateCv extends Component {
   }
   
   render(){
+
   
     return (
       <div className="app flex-row align-items-center">
@@ -117,8 +120,8 @@ export default class CreateCv extends Component {
                 <CardBody className="p-4">
                   <Form>
                       <Link to="/UserPage">
-                        <Button>Повернутися до останньої сторонки</Button>
-                      </Link>
+                        <Button color="success" block>Повернутися до останньої сторонки</Button>
+                      </Link> 
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.location} placeholder="Де ви шукаєте роботу?" />
                       </InputGroup>
@@ -149,7 +152,7 @@ export default class CreateCv extends Component {
                     <InputGroup className="mb-3">
                       <Input type="text"  onChange={this.description} placeholder="Додаткова інформація" />
                     </InputGroup>
-                    <Button  onClick={() => this.create()}  color="success" block>Create CV</Button>
+                    <Button  onClick={() => this.create()}  color="success" block>Створити резюме</Button>
                   </Form>
                 </CardBody>
               </Card>
