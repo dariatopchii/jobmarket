@@ -1,6 +1,6 @@
 import React from 'react';
 import data from "bootstrap/js/src/dom/data";
-import {Link} from "react-router-dom";
+import { Link } from '@mui/material';
 import '../Cv.css';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
   
@@ -107,11 +107,13 @@ class UserCv extends React.Component {
                     <p><b>Опис: </b>{cv.description}</p>
           </Col>
           <Col>
-          <Link to="/UserPage/UserCv/Edit" state={{cv: cv}} >
-              <Button>Редагування</Button>
-            </Link>
-            <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
-            <Button onClick={() => this.archive(cv.id)}>Архівація</Button>
+          <Row>
+              <Button><Link  color="white" underline="none" to="/UserPage/UserCv/Edit" state={{cv: cv}}>Редагування</Link></Button>
+            
+            </Row>
+          <Row><Button>Видалення</Button></Row>
+            
+            <Row><Button onClick={() => this.archive(cv.id)}>Архівація</Button></Row>
           </Col>
         </Row>
         ))}
