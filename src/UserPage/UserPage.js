@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom'
-import { List} from '@mui/material';
+import { List } from '@mui/material';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 
@@ -29,7 +29,7 @@ export default class UserPage extends React.Component {
             <Link to="/UserPage/CreateVacancy">
               <Button>Створити вакансію</Button>
             </Link>
-            <Link>
+            <Link to="/UserPage/UserVacancy">
               <Button>Подивитися свої вакансії</Button>
             </Link>
           </List>    
