@@ -35,6 +35,7 @@ class EditCv extends Component {
     this.description = this.description.bind(this);
     this.edit = this.edit.bind(this);
   }
+
   gender(event) {
     this.setState({ gender: event.target.value })
   }
@@ -123,7 +124,7 @@ class EditCv extends Component {
     console.log(cv)
     return (
       <div className="app flex-row align-items-center">
-          <Container>
+        <Container>
           <Row className="justify-content-center">
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">

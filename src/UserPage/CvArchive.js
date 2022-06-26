@@ -45,7 +45,7 @@ class UserCv extends React.Component {
         }
         
       }
-      )
+    )
   }
 
   unarchive(cvId){
@@ -61,12 +61,11 @@ class UserCv extends React.Component {
           console.log('success')
           this.removeCvFromArray(cvId)
         }
-        else{
+        else {
           console.log('nope')
-        }
-        
+        } 
       }
-      )
+    )
   }
 
 
@@ -76,10 +75,6 @@ class UserCv extends React.Component {
     this.setState({userCvs: result})
   }
 
-  redirect(cv){
-    localStorage.setItem('cv', JSON.stringify(cv))
-    console.log(localStorage)
-  }
 
   render() { 
     console.log(localStorage)
@@ -88,13 +83,13 @@ class UserCv extends React.Component {
     return (
       <div>
         <div>
-        <Link to="/UserPage/UserCv">
-          <Button color="success" block>Повернутися до останньої сторонки</Button>
-        </Link>
+          <Link to="/UserPage/UserCv">
+            <Button color="success" block>Повернутися до останньої сторонки</Button>
+          </Link>
         </div>
         <div>{userCvs.map(cv => (
-        <Row className='cvOutLine'>
-          <Col key={'/' + cv.id + '_div'}>
+          <Row className='cvOutLine'>
+            <Col key={'/' + cv.id + '_div'}>
               <p><b>{cv.occupation}</b></p>
               <p><b>Email: </b> {cv.email}</p>
                     <p><b>Імʼя: </b> {cv.name}</p>
@@ -108,12 +103,12 @@ class UserCv extends React.Component {
                     <p><b>Фірма: </b> {cv.firm}</p>
                     <p><b>Посада: </b> {cv.position}</p>
                     <p><b>Опис: </b>{cv.description}</p>
-          </Col>
-          <Col>
-            <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
-            <Button onClick={() => this.unarchive(cv.id)}>Відновлення</Button>
-          </Col>
-        </Row>
+            </Col>
+            <Col>
+              <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
+              <Button onClick={() => this.unarchive(cv.id)}>Відновлення</Button>
+            </Col>
+          </Row>
         ))}
         </div> 
       </div>
