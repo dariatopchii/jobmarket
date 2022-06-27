@@ -16,6 +16,7 @@ import EditVacancy from './UserPage/EditVacancy'
 import Home from './Home'
 import SendEmail from './SendEmail'
 import CvArchive from './UserPage/CvArchive'
+import VacArchive from './UserPage/VacArchive'
 
 
 export default class App extends React.Component {
@@ -31,6 +32,7 @@ export default class App extends React.Component {
                 <Route path='/UserPage/UserVacancy' element={<UserVacancy/>}/>
                 <Route path='/UserPage/UserVacancy/EditVacancy' element={<EditVacancy/>}/>
                 <Route path='/UserPage/CreateVacancy' element={<CreateVacancy/>} /> 
+                <Route path='/UserPage/UserVacancy/Archive' element={<VacArchive/>} /> 
                 <Route path='/SendEmail' element={<SendEmail/>}/>
                 <Route path='/Home' element={<Home/>}/>
                 <Route path='/Main' element={<Main/>}/>

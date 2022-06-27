@@ -100,7 +100,7 @@ export default class CreateVacancy extends Component {
                 <CardBody className="p-4">
                   <Form>
                       <Link to="/UserPage">
-                        <Button>Повернутися до останньої сторонки</Button>
+                        <Button color="success" block>Повернутися до минулої сторонки</Button>
                       </Link>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.occupation} placeholder="Позиція"  />
@@ -117,7 +117,7 @@ export default class CreateVacancy extends Component {
                     <InputGroup className="mb-3">
                       <Input type="text"  onChange={this.description} placeholder="Надайте, будь ласка, інформацію" />
                     </InputGroup>
-                    <Button  onClick={() => this.edit()}  color="success" block>Змінити</Button>
+                    <Button  onClick={() => this.create()}  color="success" block>Створити</Button>
                   </Form>
                 </CardBody>
               </Card>
