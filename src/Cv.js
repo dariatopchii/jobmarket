@@ -112,7 +112,6 @@ search(event) {
                     <p><b>{cv.occupation}</b></p>
                     <p><b>Email: </b> {cv.email}</p>
                     <p><b>Імʼя: </b> {cv.name}</p>
-                    <p><b>Стать: </b> {cv.gender}</p>
                     <p><b>Освіта: </b> {cv.education}</p>
                     <p><b>Місто пошуку: </b> {cv.location}</p>
                     <p><b>Бажана заробітня плата: </b>{cv.salary}</p>

@@ -1,8 +1,8 @@
 import React, { Component,  TextField, } from 'react';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Navigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import {useLocation} from "react-router-dom";
+import { Link } from '@mui/material';
+import { useLocation } from "react-router-dom";
 
 function funcEditCv(Component) {
   return props => <Component {...props} location={useLocation()} />
@@ -12,7 +12,6 @@ class EditCv extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gender: '',
       location: '',
       occupation: '',
       education: '',
@@ -24,7 +23,6 @@ class EditCv extends Component {
       toUser: null,
     }
 
-    this.gender = this.gender.bind(this);
     this.location = this.location.bind(this);
     this.occupation = this.occupation.bind(this);
     this.education = this.education.bind(this);
@@ -34,10 +32,6 @@ class EditCv extends Component {
     this.salary = this.salary.bind(this);
     this.description = this.description.bind(this);
     this.edit = this.edit.bind(this);
-  }
-
-  gender(event) {
-    this.setState({ gender: event.target.value })
   }
   location(event) {
     this.setState({ city: event.target.value })
@@ -77,7 +71,7 @@ class EditCv extends Component {
       body: JSON.stringify({
         email: JSON.parse(localStorage.getItem('user')).email,
         name: JSON.parse(localStorage.getItem('user')).name,
-        gender: this.state.gender,
+        id: this.props.location.state.cv.id,
         location: this.state.location,
         occupation: this.state.occupation,
         education: this.state.education,
@@ -85,7 +79,7 @@ class EditCv extends Component {
         firm: this.state.firm,
         position: this.state.position,
         salary: this.state.salary,
-        description: this.state.description,
+        description: this.state.description,  
         userId: JSON.parse(localStorage.getItem('user')).id
       })
     })
@@ -113,14 +107,10 @@ class EditCv extends Component {
       }
   )
   }
-
-  removeCv(){
-    console.log(2)
-    localStorage.removeItem('cv')
-  }
   
   render(){
     const cv = this.props.location.state.cv
+    console.log(cv)
     console.log(cv)
     return (
       <div className="app flex-row align-items-center">
@@ -130,8 +120,8 @@ class EditCv extends Component {
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form>
-                      <Link to="/UserPage/UserCv">
-                        <Button onClick={() => this.removeCv}>Повернутися до останньої сторонки</Button>
+                      <Link href="/UserPage/UserCv">
+                        т<Button color="success" block>Повернутися до минулої сторонки</Button>
                       </Link>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.location} defaultValue= {cv.location} />
@@ -144,9 +134,6 @@ class EditCv extends Component {
                       </InputGroup>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.education} defaultValue={cv.education}  />
-                      </InputGroup>
-                      <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.gender} defaultValue={cv.gender}  />
                       </InputGroup>
                       <b>
                         Інформація про останнє місце працевлаштування

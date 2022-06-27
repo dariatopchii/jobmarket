@@ -9,7 +9,6 @@ export default class CreateCv extends Component {
   constructor() {
     super();
     this.state = {
-      gender: '',
       location: '',
       occupation: '',
       education: '',
@@ -22,7 +21,6 @@ export default class CreateCv extends Component {
     }
 
 
-    this.gender = this.gender.bind(this);
     this.location = this.location.bind(this);
     this.occupation = this.occupation.bind(this);
     this.education = this.education.bind(this);
@@ -32,9 +30,6 @@ export default class CreateCv extends Component {
     this.salary = this.salary.bind(this);
     this.description = this.description.bind(this);
     this.create = this.create.bind(this);  
-  }
-  gender(event) {
-    this.setState({ gender: event.target.value })
   }
   location(event) {
     this.setState({ location: event.target.value })
@@ -74,7 +69,6 @@ export default class CreateCv extends Component {
       body: JSON.stringify({
         email: JSON.parse(localStorage.getItem('user')).email,
         name: JSON.parse(localStorage.getItem('user')).name,
-        gender: this.state.gender,
         location: this.state.location,
         occupation: this.state.occupation,
         education: this.state.education,
@@ -120,7 +114,7 @@ export default class CreateCv extends Component {
                 <CardBody className="p-4">
                   <Form>
                       <Link to="/UserPage">
-                        <Button color="success" block>Повернутися до останньої сторонки</Button>
+                        <Button color="success" block>Повернутися до минулої сторонки</Button>
                       </Link> 
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.location} placeholder="Де ви шукаєте роботу?" />
@@ -133,9 +127,6 @@ export default class CreateCv extends Component {
                       </InputGroup>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.education} placeholder="Введіть вашу освіту" />
-                      </InputGroup>
-                      <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.gender} placeholder="Введіть ваш пол" />
                       </InputGroup>
                       <b>
                         Інформація про останнє місце працевлаштування

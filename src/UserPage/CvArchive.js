@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import '../Cv.css';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
   
-class UserCv extends React.Component {
+class CvArchive extends React.Component {
   constructor(props) {
     super(props)
     
@@ -84,7 +84,7 @@ class UserCv extends React.Component {
       <div>
         <div>
           <Link to="/UserPage/UserCv">
-            <Button color="success" block>Повернутися до останньої сторонки</Button>
+            <Button color="success" block>Повернутися до минулої сторонки</Button>
           </Link>
         </div>
         <div>{userCvs.map(cv => (
@@ -93,7 +93,6 @@ class UserCv extends React.Component {
               <p><b>{cv.occupation}</b></p>
               <p><b>Email: </b> {cv.email}</p>
                     <p><b>Імʼя: </b> {cv.name}</p>
-                    <p><b>Стать: </b> {cv.gender}</p>
                     <p><b>Освіта: </b> {cv.education}</p>
                     <p><b>Місто пошуку: </b> {cv.location}</p>
                     <p><b>Бажана заробітня плата: </b>{cv.salary}</p>
@@ -105,7 +104,7 @@ class UserCv extends React.Component {
                     <p><b>Опис: </b>{cv.description}</p>
             </Col>
             <Col>
-              <Button  onClick={() => this.delete(cv.id)}>Видалення</Button>
+            <Button onClick={() => { if (window.confirm('Ви впевнені, що бажаєте видалити резюме?')) this.delete(cv.id)}}>Видалення</Button>
               <Button onClick={() => this.unarchive(cv.id)}>Відновлення</Button>
             </Col>
           </Row>
@@ -116,4 +115,4 @@ class UserCv extends React.Component {
     )
   }
 }
-export default UserCv;
+export default CvArchive;
