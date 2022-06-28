@@ -13,10 +13,11 @@ class UserCv extends React.Component {
 
     this.delete = this.delete.bind(this);
     this.archive = this.archive.bind(this);
+    this.downloadFile = this.downloadFile.bind(this);
   }
 
   componentDidMount() {
-    const apiUrl = 'https://localhost:5001/api/Cv/UserCvs?arch=false&userId='+JSON.parse(localStorage.getItem('user')).id;
+    const apiUrl = 'https://localhost:5001/api/Cv/UserCvs?arch=false&userId=' + JSON.parse(localStorage.getItem('user')).id;
     fetch(apiUrl)
       .then((response) => {
         console.log(response)
@@ -33,7 +34,11 @@ class UserCv extends React.Component {
   delete(cvId){
     const apiUrl = 'https://localhost:5001/api/Cv/'+ cvId;
     console.log(apiUrl)
-    fetch(apiUrl)
+      const requestOptions = {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json'}
+      };
+    fetch(apiUrl, requestOptions)
       .then((response) => {
         if(response.status === 200){
           console.log('success')
@@ -68,6 +73,21 @@ class UserCv extends React.Component {
       )
   }
 
+    downloadFile(cvId){
+        const apiUrl = 'https://localhost:5001/api/Cv/'+ cvId + '/file';
+        console.log(apiUrl)
+        fetch(apiUrl)
+            .then(res => res.blob())
+            .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'cv.txt');
+                    document.body.appendChild(link);
+                    link.click();
+                }
+            )
+    }
 
   removeCvFromArray(id){
     console.log(id)
@@ -116,6 +136,9 @@ class UserCv extends React.Component {
               <Row>
                 <Button onClick={() => this.archive(cv.id)}>Архівація</Button>
               </Row>
+                <Row>
+                 <Button onClick={() => this.downloadFile(cv.id)}>Скачати</Button>
+                </Row>
             </Col>
           </Row>
         ))}
