@@ -60,46 +60,52 @@ export default class CreateCv extends Component {
 
 
   create(event) {
-    fetch('https://localhost:5001/api/Cv', {
-      method: 'post',
-      headers: {
-        'Accept': '*/*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: JSON.parse(localStorage.getItem('user')).email,
-        name: JSON.parse(localStorage.getItem('user')).name,
-        location: this.state.location,
-        occupation: this.state.occupation,
-        education: this.state.education,
-        workplace: this.state.workplace,
-        firm: this.state.firm,
-        position: this.state.position,
-        salary: this.state.salary,
-        description: this.state.description,
-        userId: JSON.parse(localStorage.getItem('user')).id
-      })
-    }).then((response) => {
-        console.log(response)
-        if (response.status === 200) {
-          this.setState({
-            toUser: true
-          })
+    const sal = this.state.salary
+    if(sal > 0){
+      fetch('https://localhost:5001/api/Cv', {
+        method: 'post',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem('user')).email,
+          name: JSON.parse(localStorage.getItem('user')).name,
+          location: this.state.location,
+          occupation: this.state.occupation,
+          education: this.state.education,
+          workplace: this.state.workplace,
+          firm: this.state.firm,
+          position: this.state.position,
+          salary: this.state.salary,
+          description: this.state.description,
+          userId: JSON.parse(localStorage.getItem('user')).id
+        })
+      }).then((response) => {
+          console.log(response)
+          if (response.status === 200) {
+            this.setState({
+              toUser: true
+            })
+          }
+          else if (Response.status === 400) {
+            console.log(13141)
+            this.setState({
+              toUser: false
+            })
+          }
+          else {
+            console.log("something is wrong")
+            this.setState({
+              toUser: false
+            })
+          }
         }
-        else if (Response.status === 400) {
-          console.log(13141)
-          this.setState({
-            toUser: false
-          })
-        }
-        else {
-          console.log("something is wrong")
-          this.setState({
-            toUser: false
-          })
-        }
-      }
-  )
+    )
+    }
+    else{
+      alert('Заробітна плата має буте більше 0!')
+    }
   }
   
   render(){

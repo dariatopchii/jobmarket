@@ -5,6 +5,7 @@
 }
 
 .headerContainer {
+    z-index: 999;
     display: flex;
     background-color: #e6f5f5;
     flex-direction: row;

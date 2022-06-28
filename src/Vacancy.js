@@ -33,13 +33,16 @@ class Vacancy extends React.Component {
     .then((data) => {
       console.log(data)
       this.setState({
-        vacss: data
+        vacs: data
       })
     });
     
   }
 
 search(event) {
+  const min = this.state.minSalaryFilter
+  const max = this.state.maxSalaryFilter
+  if ((min && max > 0) && (min && max != null)){     
   // const apiUrl = 'https://localhost:5001/api/Vacancy',
   fetch('https://localhost:5001/api/Vacancy/FilterVacs', {
       method: 'post',
@@ -67,16 +70,12 @@ search(event) {
       vacs: data
     })
   });
-  
-  console.log(JSON.stringify({
-    name: this.state.nameFilter,
-    location: this.state.locationFilter,
-    occupation: this.state.occupationFilter,
-    minSalary: this.state.minSalaryFilter,
-    maxSalary: this.state.maxSalaryFilter,
-  }))
-
+  }
+    else{
+      alert('Заробітна плата має буте більше 0!')
+    }
 }
+
 
   nameFilter(event) {
     this.setState({nameFilter: event.target.value })
@@ -95,7 +94,7 @@ search(event) {
 }
 
   render() {
-    const vacs = this.state.vacs      
+    const vacs = this.state.vacs     
     return (
         <div>
           <div>
@@ -118,8 +117,7 @@ search(event) {
               <p><b>Місто: </b>{vac.workplace}</p>
               <p><b>Фірма: </b> {vac.firm}</p>
               <p><b>Опис: </b>{vac.description}</p>
-          </div>
-                
+          </div>      
             ))}
           </div> 
         </div>

@@ -12,20 +12,37 @@ export default class Login extends Component {
             email: '',
             password: '',
             toUser: null,
+            error: null
         }
         
         this.password = this.password.bind(this);
         this.email = this.email.bind(this);
         this.login = this.login.bind(this);
     }
-    email(event) {
-        this.setState({email: event.target.value })
+
+    isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
     }
+
+    email(event) {
+        if (!this.isValidEmail(event.target.value)) {
+         this.setState({
+           error: 'Неправильний ввод'
+         })
+        } else {
+         this.setState({
+             error: null,
+             email: event.target.value
+         })
+       }
+     }
     password(event) {
         this.setState({password: event.target.value })
     }
      
     login(event) {
+        if(this.state.error == null)
+        {
         fetch('https://localhost:5001/api/User/Login', {
             method: 'post',
             headers: {
@@ -43,14 +60,13 @@ export default class Login extends Component {
                         return response.json()
                     }
                     else if (Response.status === 400) {
-                        console.log(13141)
                         this.setState({
                             toUser: false,
                         })
                         return Promise.reject()
                     }
                     else {
-                        console.log("ew")
+                        alert('Неправильно введені дані')
                         this.setState({
                             toMain: false,
                         })
@@ -66,6 +82,9 @@ export default class Login extends Component {
                     console.log(localStorage)
                 }
             )
+        }else{
+            alert('Неправильний ввод електронної пошти')
+        }
     }
     render() {
         return (
@@ -78,10 +97,10 @@ export default class Login extends Component {
                                     <CardBody>
                                         <Form>
                                             <InputGroup className="mb-3">
-                                                <Input type="text" onChange={this.email} placeholder="Enter email" />
+                                                <Input type="text" onChange={this.email} placeholder="Введіть адрес електронної пошти" />   
                                             </InputGroup>
                                             <InputGroup className="mb-4">
-                                                <Input type="password" onChange={this.password} placeholder="Enter Password" />
+                                                <Input type="password" onChange={this.password} placeholder="Пароль" />
                                             </InputGroup>
                                             <Button onClick={() => this.login()} color="success" block>Login</Button>
                                             <Link to="/Signup">
