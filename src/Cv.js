@@ -39,8 +39,10 @@ class Cv extends React.Component {
     
   }
 
-search(event) {
-  // const apiUrl = 'https://localhost:5001/api/Cv',
+search(event){
+  const min = this.state.minSalaryFilter
+  const max = this.state.maxSalaryFilter
+  if ((min && max > 0) && (min && max != null)){ 
   fetch('https://localhost:5001/api/Cv/FilterCvs', {
       method: 'post',
       headers: {
@@ -66,17 +68,13 @@ search(event) {
     this.setState({
       cvs: data
     })
-  });
-  
-  console.log(JSON.stringify({
-    name: this.state.nameFilter,
-    location: this.state.locationFilter,
-    occupation: this.state.occupationFilter,
-    minSalary: this.state.minSalaryFilter,
-    maxSalary: this.state.maxSalaryFilter,
-  }))
-
+  })
 }
+else{
+  alert('Заробітна плата має буте більше 0!')
+}
+}
+
 
   nameFilter(event) {
     this.setState({nameFilter: event.target.value })
@@ -95,7 +93,7 @@ search(event) {
 }
 
   render() {
-    const cvs = this.state.cvs      
+    const cvs = this.state.cvs    
     return (
         <div>
           <div>
@@ -108,7 +106,7 @@ search(event) {
           </div>
           <div> 
             {cvs.map(cv => (
-              <div><div key={'/' + cv.id + '_div'} className='cvOutLine'>
+              <div><div key={cv.id} className='cvOutLine'>
                     <p><b>{cv.occupation}</b></p>
                     <p><b>Email: </b> {cv.email}</p>
                     <p><b>Імʼя: </b> {cv.name}</p>
@@ -121,14 +119,13 @@ search(event) {
                     <p><b>Фірма: </b> {cv.firm}</p>
                     <p><b>Посада: </b> {cv.position}</p>
                     <p><b>Опис: </b>{cv.description}</p>
-                </div> <Link to="/SendEmail"  state={{cv: cv}}>
-              <Button>Відправити email</Button>
-            </Link></div>
+                </div>
+              </div>
                 
             ))}
           </div> 
         </div>
-    )
+      )
   }
 }
 export default Cv;

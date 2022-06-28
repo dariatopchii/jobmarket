@@ -1,25 +1,26 @@
 import React, { Component,  TextField, } from 'react';
 import { Button, Card, CardFooter, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Navigate } from 'react-router';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
 function funcEditCv(Component) {
-  return props => <Component {...props} location={useLocation()} />
+  return props => <Component {...props} loc={useLocation()} />
 }
 
 class EditCv extends Component {
   constructor(props) {
     super(props);
+    const cv = this.props.loc.state.cv
     this.state = {
-      location: '',
-      occupation: '',
-      education: '',
-      workplace: '',
-      firm: '',
-      position: '',
-      salary: '',
-      description: '',
+      location: cv.location,
+      occupation: cv.occupation,
+      education: cv.education,
+      workplace: cv.workplace,
+      firm: cv.firm,
+      position: cv.position,
+      salary: cv.salary,
+      description: cv.description,
       toUser: null,
     }
 
@@ -34,7 +35,7 @@ class EditCv extends Component {
     this.edit = this.edit.bind(this);
   }
   location(event) {
-    this.setState({ city: event.target.value })
+    this.setState({ location: event.target.value })
   }
   occupation(event) {
     this.setState({ occupation: event.target.value })
@@ -109,9 +110,6 @@ class EditCv extends Component {
   }
   
   render(){
-    const cv = this.props.location.state.cv
-    console.log(cv)
-    console.log(cv)
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -120,35 +118,44 @@ class EditCv extends Component {
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form>
-                      <Link href="/UserPage/UserCv">
-                        т<Button color="success" block>Повернутися до минулої сторонки</Button>
+                      <Link to="/UserPage/UserCv">
+                        <Button color="success" block>Повернутися до минулої сторонки</Button>
                       </Link>
+                      <p></p>
+                      <p><b>Місто</b></p>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.location} defaultValue= {cv.location} />
+                        <Input type="text"  onChange={this.location} value={this.state.location} />
                       </InputGroup>
+                      <p><b>Бажаєма заробітна плата</b></p>
                       <InputGroup className="mb-3">
-                      <Input  type="number" onChange={this.salary} defaultValue={cv.salary}  />
-                    </InputGroup>
-                      <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.occupation} defaultValue={cv.occupation}  />
+                        <Input  type="number" onChange={this.salary} value={this.state.salary}  />
                       </InputGroup>
+                      <p><b>Професія</b></p>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={this.education} defaultValue={cv.education}  />
+                        <Input type="text"  onChange={this.occupation} value={this.state.occupation}  />
+                      </InputGroup>
+                      <p><b>Освіта</b></p>
+                      <InputGroup className="mb-3">
+                        <Input type="text"  onChange={this.education} value={this.state.education}  />
                       </InputGroup>
                       <b>
                         Інформація про останнє місце працевлаштування
                       </b>
+                      <p><b>Компанія</b></p>
                       <InputGroup className="mb-3">
-                        <Input type="text"  onChange={() => this.firm} defaultValue={cv.firm} />
+                        <Input type="text"  onChange={this.firm} value={this.state.firm} />
                       </InputGroup>
+                      <p><b>Позиція</b></p>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.position} defaultValue={cv.position}  />
+                      <Input type="text"  onChange={this.position} value={this.state.position}  />
                     </InputGroup>
+                    <p><b>Місто</b></p>
                     <InputGroup className="mb-3">
-                      <Input type="text" aria-multiline onChange={this.workplace} defaultValue={cv.workplace}></Input>
+                      <Input type="text" aria-multiline onChange={this.workplace} value={this.state.workplace}></Input>
                     </InputGroup>
+                    <p><b>Опис</b></p>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.description} defaultValue="Надайте, будь ласка, інформацію про вас" />
+                      <Input type="text"  onChange={this.description} value={this.state.description} />
                     </InputGroup>
                     <Button  onClick={() => this.edit()}  color="success" block>Змінити</Button>
                   </Form>

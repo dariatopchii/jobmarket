@@ -89,7 +89,7 @@ class CvArchive extends React.Component {
         </div>
         <div>{userCvs.map(cv => (
           <Row className='cvOutLine'>
-            <Col key={'/' + cv.id + '_div'}>
+            <Col key={cv.id}>
               <p><b>{cv.occupation}</b></p>
               <p><b>Email: </b> {cv.email}</p>
                     <p><b>Імʼя: </b> {cv.name}</p>

@@ -11,14 +11,15 @@ function funcEditVac(Component) {
 class EditVacancy extends Component {
   constructor(props) {
     super(props);
+    const vac = this.props.loc.state.vac
     this.state = {
-      location: '',
-      occupation: '',
-      firm: '',
-      position: '',
-      salary: '',
-      description: '',
-      requirments: '',
+      location: vac.location,
+      occupation:vac.occupation,
+      firm: vac.firm,
+      position: vac.position,
+      salary: vac.salary,
+      description: vac.description,
+      requirments: vac.requirments,
       toUser: null,
     }
 
@@ -117,23 +118,29 @@ class EditVacancy extends Component {
                       <Link to="/UserPage/UserVacancy">
                         <Button color="success" block>Повернутися до минулої сторонки</Button>
                       </Link>
+                    <b>Місто</b>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.location} defaultValue= {vac.location} />
                       </InputGroup>
+                    <b>Заробітна плата</b>
                       <InputGroup className="mb-3">
                       <Input  type="number" onChange={this.salary} defaultValue={vac.salary}  />
                     </InputGroup>
+                    <b>Позиція</b>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.occupation} defaultValue={vac.occupation}  />
                       </InputGroup>
+                    <b>Фірма</b>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.firm} defaultValue={vac.firm} />
                       </InputGroup>
+                    <b>Вимоги</b>
                       <InputGroup className="mb-3">
                         <Input type="text"  onChange={this.requirments} defaultValue={vac.requirments} />
                       </InputGroup>
+                    <b>Інформація</b>
                     <InputGroup className="mb-3">
-                      <Input type="text"  onChange={this.description} defaultValue="Надайте, будь ласка, інформацію" />
+                      <Input type="text"  onChange={this.description} defaultValue={vac.description} />
                     </InputGroup>
                     <Button  onClick={this.edit}  color="success" block>Змінити</Button>
                   </Form>

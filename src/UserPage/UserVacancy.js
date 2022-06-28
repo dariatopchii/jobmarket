@@ -3,6 +3,7 @@ import data from "bootstrap/js/src/dom/data";
 import { Link } from 'react-router-dom';
 import '../Cv.css';
 import { Button, Col, Row } from 'reactstrap';
+import './User.css';
   
 class Uservac extends React.Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class Uservac extends React.Component {
             </Col>
             <Col>
               <Row>
-                <Button><Link color="white" underline="none" to="/UserPage/UserVacancy/EditVacancy" state={{vac: vac}}>Редагування</Link></Button>
+                <Button><Link to="/UserPage/UserVacancy/EditVacancy" state={{vac: vac}}>Редагування</Link></Button>
               </Row>
               <Row>
                 <Button onClick={() => { if (window.confirm('Ви впевнені, що бажаєте видалити вакансію?')) this.delete(vac.id)}}>Видалення</Button>

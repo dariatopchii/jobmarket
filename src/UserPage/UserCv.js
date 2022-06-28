@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Cv.css';
 import { Button, Col, Row } from 'reactstrap';
+import './User.css';
   
 class UserCv extends React.Component {
   constructor(props) {
@@ -127,7 +128,7 @@ class UserCv extends React.Component {
             <Col>
               <Row>
                   <Button>
-                    <Link color="white" underline="none" to="/UserPage/UserCv/Edit" state={{cv: cv}}>Редагування</Link>
+                    <Link to="/UserPage/UserCv/Edit" state={{cv: cv}}>Редагування</Link>
                   </Button>
               </Row>
               <Row>
